@@ -1,0 +1,83 @@
+﻿@{
+    // dicionario de dados que é passado para a view
+    ViewData["Title"] = "Carrossel";
+}
+
+@using ControleEstoque.Models;
+
+@model List<Produto>;
+
+<div class="form-group">
+    <div class="row">
+        <div class="col-lg-12">
+            <h3>Catálogo</h3>
+
+            <div class="pull-right">
+
+                <a class="btn btn-primary" asp-action="cadastroproduto">
+                    + Cadastrar Produto
+                </a>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<div id="my-carousel" class="carousel slide" data-ride="carousel">
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+
+        @{
+            const int TAMANHO_PAGINA = 4;
+
+            int qtdPaginas = (int)Math.Ceiling((double)Model.Count() / TAMANHO_PAGINA);
+        }
+
+        @for (int pagina = 0; pagina < qtdPaginas; pagina++)
+        {
+
+            <div class="item @(pagina == 0 ? "active" : "")">
+                <div class="row">
+                    @{
+                        // 4 primeiros itens da lista
+                        var produtosDaPagina = Model.Skip(pagina * TAMANHO_PAGINA).Take(TAMANHO_PAGINA);
+                    }
+
+                    @foreach (var produto in produtosDaPagina)
+                    {
+
+                        <div class="col-md-3 col-sm-3 col-lg-3">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <img class="img-produto-carrossel" src="/images/produtos/large_@(produto.Codigo).jpg" />
+                                </div>
+                                <div class="panel-footer produto-footer">
+                                    <div class="produto-nome">@produto.Nome @produto.Codigo</div>
+                                    <div><h4><strong>R$ @produto.ValorVenda</strong></h4></div>
+                                    <div class="text-center">
+                                        <a asp-action="carrinho"
+                                            asp-controller="pedido"
+                                            asp-route-codigo="@produto.Codigo"
+                                           class="btn btn-success">Adicionar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    }
+
+                </div>
+
+            </div>
+
+        }
+    </div>
+    <!-- Controls -->
+    <a class="left carousel-control" href="#my-carousel" role="button" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#my-carousel" role="button" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+    </a>
+</div>

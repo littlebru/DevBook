@@ -1,0 +1,48 @@
+﻿@{
+    // dicionario de dados que é passado para a view
+    ViewData["Title"] = "Cadastro de Produto";
+}
+
+
+<h3>Cadastro de Produto</h3>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" for="nomeCliente">Nome do Produto</label>
+                <input type="text" class="form-control" id="nomeCliente" placeholder="Nome do Produto">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="email">Tipo do Produto</label>
+                <input type="email" class="form-control" id="tipo-produto" placeholder="Livro">
+            </div>
+            <div class="form-group">
+                <button type="submit"
+                        class="btn btn-success">
+                    Cadastrar
+                </button>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" for="valor-compra">Valor de Compra</label>
+                <input type="number" class="form-control" id="valor-compra" placeholder="R$">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="quantidade">Quantidade</label>
+                <input type="number" class="form-control" id="quantidade" placeholder="Unidade">
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="form-group">
+                <label class="control-label" for="valor-venda">Valor de Venda</label>
+                <input type="number" class="form-control" id="valor-venda" placeholder="R$">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<a class="btn btn-default" asp-action="carrossel">
+    Continuar Comprando
+</a>
